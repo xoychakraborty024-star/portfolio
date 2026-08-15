@@ -3,8 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JOY CHAKRABARTY — Cinematic &amp; Brand</title>
+<title>JOY CHAKRABARTY — Cinematic &amp; Brand Director / DOP</title>
+<meta name="description" content="Portfolio of Joy Chakrabarty (PeakSanima) — Director, DOP & Assistant Director based in Delhi, specialising in campaign films, motion, and brand stills.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -14,10 +16,10 @@
     --alarm:#FF2E00;
     --grey:#8C8C86;
     --line:#3A3A3A;
-    --glass:rgba(237,237,231,0.06);
-    --glass-strong:rgba(237,237,231,0.11);
-    --glass-border:rgba(237,237,231,0.22);
-    --glass-blur:18px;
+    --glass:rgba(237,237,231,0.05);
+    --glass-strong:rgba(237,237,231,0.12);
+    --glass-border:rgba(237,237,231,0.18);
+    --glass-blur:20px;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -26,8 +28,21 @@
     color:var(--paper);
     font-family:'JetBrains Mono', monospace;
     overflow-x:hidden;
+    position:relative;
   }
   body.no-cursor{cursor:none;}
+  
+  /* Film Grain Overlay */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    pointer-events: none;
+    z-index: 9000;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+
   h1,h2,h3, .display{
     font-family:'Space Grotesk', sans-serif;
     font-weight:700;
@@ -37,7 +52,7 @@
   }
   a{color:inherit;text-decoration:none;}
   ::selection{background:var(--alarm);color:var(--bg);}
-  button{cursor:pointer;}
+  button{cursor:pointer; background:none; border:none; color:inherit; font-family:inherit;}
 
   .eyebrow{
     font-size:11px;
@@ -60,7 +75,7 @@
     transform:translate(-50%,-50%); opacity:0; transition:opacity .2s ease;
   }
   .cursor-ring{
-    position:fixed; width:38px; height:38px; border-radius:50%;
+    position:fixed; width:42px; height:42px; border-radius:50%;
     border:1px solid var(--glass-border); background:var(--glass);
     backdrop-filter:blur(8px) saturate(160%); -webkit-backdrop-filter:blur(8px) saturate(160%);
     pointer-events:none; z-index:9998; transform:translate(-50%,-50%);
@@ -68,9 +83,10 @@
                background .3s ease, border-color .3s ease, opacity .2s ease;
     display:flex; align-items:center; justify-content:center;
     font-size:9px; letter-spacing:.12em; color:var(--paper); opacity:0;
+    font-weight:700;
   }
   .cursor-ring.active{opacity:1;}
-  .cursor-ring.hover{width:88px; height:88px; background:var(--glass-strong); border-color:var(--alarm);}
+  .cursor-ring.hover{width:90px; height:90px; background:var(--glass-strong); border-color:var(--alarm);}
   .cursor-ring.hover span{opacity:1;}
   .cursor-ring span{opacity:0; transition:opacity .2s ease;}
 
@@ -84,14 +100,14 @@
     display:flex; align-items:center; justify-content:space-between;
     padding:18px 28px;
     border-bottom:1px solid var(--glass-border);
-    background:rgba(10,10,10,0.5);
+    background:rgba(10,10,10,0.65);
     backdrop-filter:blur(var(--glass-blur)) saturate(160%);
     -webkit-backdrop-filter:blur(var(--glass-blur)) saturate(160%);
   }
   .logo{
     font-family:'Space Grotesk', sans-serif;
     font-weight:700; font-size:17px; letter-spacing:0.02em;
-    text-transform:uppercase; line-height:1.4;
+    text-transform:uppercase; line-height:1.3;
   }
   .logo span{color:var(--alarm);}
   nav{display:flex; gap:26px; align-items:center;}
@@ -109,7 +125,8 @@
     font-size:11px; letter-spacing:0.1em; color:var(--grey);
   }
   .rec-dot{
-    width:7px; height:7px; border-radius:50%; background:var(--alarm);
+    width:8px; height:8px; border-radius:50%; background:var(--alarm);
+    box-shadow: 0 0 8px var(--alarm);
     animation:blink 1.4s steps(1) infinite;
   }
   @keyframes blink{50%{opacity:0.15;}}
@@ -119,8 +136,8 @@
   .mobile-menu{
     position:fixed; inset:0; z-index:200;
     display:flex; flex-direction:column; align-items:flex-start; justify-content:center;
-    gap:22px; padding:40px;
-    background:rgba(10,10,10,0.6);
+    gap:26px; padding:40px;
+    background:rgba(10,10,10,0.85);
     backdrop-filter:blur(26px) saturate(160%); -webkit-backdrop-filter:blur(26px) saturate(160%);
     opacity:0; pointer-events:none; transform:translateY(-12px);
     transition:opacity .35s ease, transform .35s ease;
@@ -134,7 +151,7 @@
     position:relative;
     min-height:100vh;
     display:flex; flex-direction:column; justify-content:flex-end;
-    padding:120px 28px 40px;
+    padding:140px 28px 40px;
     border-bottom:1px solid var(--line);
     background-image:
       linear-gradient(var(--line) 1px, transparent 1px),
@@ -159,11 +176,11 @@
     gap:20px; flex-wrap:wrap;
   }
   .hero-sub p{
-    max-width:420px; font-size:13px; line-height:1.6; color:#C9C9C1;
+    max-width:460px; font-size:13px; line-height:1.6; color:#C9C9C1;
   }
   .scroll-cue{font-size:11px; letter-spacing:.14em; color:var(--grey); white-space:nowrap;}
 
-  /* viewfinder brackets: glass lens that tracks the cursor, hero only */
+  /* Viewfinder Brackets & Lens */
   .bracket{
     position:fixed; width:26px; height:26px; pointer-events:none; z-index:60;
     border-color:var(--alarm); opacity:0; transition:opacity .2s ease;
@@ -182,7 +199,7 @@
     box-shadow:inset 0 0 40px rgba(237,237,231,0.06), 0 0 60px rgba(255,46,0,0.06);
   }
 
-  /* ---------- SECTION LABELS ---------- */
+  /* ---------- SECTION LABELS & FILTERS ---------- */
   .section-head{
     display:flex; justify-content:space-between; align-items:baseline;
     padding:50px 28px 22px; border-bottom:1px solid var(--line);
@@ -194,55 +211,94 @@
   /* ---------- WORK GRID ---------- */
   .work-grid{
     display:grid;
-    grid-template-columns:repeat(6,1fr);
+    grid-template-columns:repeat(2, 1fr);
     border-bottom:1px solid var(--line);
   }
   .work-item{
-    grid-column:span 3;
+    grid-column:span 1;
     border-right:1px solid var(--line);
     border-bottom:1px solid var(--line);
     position:relative;
-    aspect-ratio:4/3;
+    aspect-ratio:16/10;
     overflow:hidden;
+    cursor:pointer;
+    transition:opacity .4s ease, transform .4s ease;
   }
-  .work-item:nth-child(odd){grid-column:span 4;}
-  .work-item:nth-child(even){grid-column:span 2;}
+  .work-item:nth-child(2n){
+    border-right:none;
+  }
+
+  /* SEE MORE DROPDOWN STYLES */
+  .see-more-container{
+    display:flex; justify-content:center; align-items:center;
+    padding:32px 28px; border-bottom:1px solid var(--line);
+    background:rgba(10,10,10,0.4);
+  }
+  .see-more-btn{
+    display:flex; align-items:center; gap:12px;
+    font-family:'Space Grotesk', sans-serif; font-size:13px; font-weight:700;
+    letter-spacing:0.14em; text-transform:uppercase;
+    padding:14px 28px; border:1px solid var(--glass-border);
+    background:var(--glass); color:var(--paper);
+    transition:all .3s cubic-bezier(.2,.8,.2,1);
+  }
+  .see-more-btn:hover{
+    border-color:var(--alarm); background:var(--glass-strong); color:var(--alarm);
+  }
+  .see-more-btn .chevron{
+    transition:transform .3s ease; font-size:10px; color:var(--alarm);
+  }
+  .see-more-btn.active .chevron{
+    transform:rotate(180deg);
+  }
+
+  .more-projects-wrapper{
+    max-height:0; overflow:hidden; opacity:0;
+    transition:max-height .6s cubic-bezier(.2,.8,.2,1), opacity .5s ease;
+  }
+  .more-projects-wrapper.expanded{
+    max-height:2200px; opacity:1;
+  }
+  .more-grid{
+    border-top:none;
+  }
+  
   .work-item .frame{
     position:absolute; inset:0;
-    background:
-      repeating-linear-gradient(135deg, #1b1b1b 0 2px, #141414 2px 26px);
+    background:repeating-linear-gradient(135deg, #1b1b1b 0 2px, #141414 2px 26px);
     display:flex; align-items:flex-end;
     transition:filter .35s ease, transform .5s ease;
     filter:grayscale(1) contrast(1.05);
   }
-  .work-item:hover .frame{filter:none; transform:scale(1.05);}
+  .work-item:hover .frame{filter:none; transform:scale(1.04);}
   .sheen{
-    position:absolute; inset:0; pointer-events:none;
+    position:absolute; inset:0; pointer-events:none; z-index:1;
     background:linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.16) 45%, transparent 60%);
     background-size:250% 250%; background-position:220% 220%;
     transition:background-position .9s ease;
   }
   .work-item:hover .sheen{background-position:-40% -40%;}
+  
   .work-meta{
     position:relative; z-index:2; width:100%;
     padding:16px; display:flex; justify-content:space-between; align-items:flex-end;
-    background:rgba(10,10,10,0.28);
-    backdrop-filter:blur(0px) saturate(140%);
-    -webkit-backdrop-filter:blur(0px) saturate(140%);
+    background:rgba(10,10,10,0.45);
+    backdrop-filter:blur(4px) saturate(140%);
+    -webkit-backdrop-filter:blur(4px) saturate(140%);
     border-top:1px solid transparent;
     transition:background .35s ease, backdrop-filter .35s ease, border-color .35s ease;
   }
   .work-item:hover .work-meta{
-    background:rgba(10,10,10,0.35);
-    backdrop-filter:blur(10px) saturate(160%);
-    -webkit-backdrop-filter:blur(10px) saturate(160%);
+    background:rgba(10,10,10,0.7);
+    backdrop-filter:blur(12px) saturate(160%);
+    -webkit-backdrop-filter:blur(12px) saturate(160%);
     border-top:1px solid var(--glass-border);
   }
   .work-meta .name{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:18px; text-transform:uppercase;}
-  .work-meta .tag{font-size:10px; color:var(--grey); letter-spacing:.1em;}
   .work-code{
     position:absolute; top:14px; left:14px; z-index:2;
     font-size:10px; color:var(--grey); letter-spacing:.1em;
+    background:rgba(10,10,10,0.5); padding:3px 6px; border-radius:2px;
   }
   .work-code b{color:var(--alarm);}
   .work-view{
@@ -253,58 +309,106 @@
   }
   .work-item:hover .work-view{opacity:1; transform:translateY(0);}
 
+  .placeholder-pattern {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: radial-gradient(circle, rgba(255,46,0,0.08) 0%, rgba(10,10,10,0.95) 70%);
+    color: var(--grey); font-size: 11px; letter-spacing: 0.15em;
+  }
+
   /* ---------- LIGHTBOX ---------- */
   .lightbox{position:fixed; inset:0; z-index:300; display:flex; align-items:center; justify-content:center; padding:24px; opacity:0; pointer-events:none; transition:opacity .35s ease;}
   .lightbox.open{opacity:1; pointer-events:auto;}
-  .lightbox-backdrop{position:absolute; inset:0; background:rgba(6,6,6,0.6); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);}
+  .lightbox-backdrop{position:absolute; inset:0; background:rgba(6,6,6,0.82); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);}
   .lightbox-card{
-    position:relative; width:min(920px,100%); max-height:88vh; overflow:auto;
-    display:grid; grid-template-columns:1.3fr 1fr;
+    position:relative; width:min(1040px,100%); max-height:90vh; overflow:hidden;
+    display:grid; grid-template-columns:1.5fr 1fr;
     transform:scale(.96) translateY(10px); transition:transform .35s cubic-bezier(.2,.8,.2,1);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.7);
   }
   .lightbox.open .lightbox-card{transform:scale(1) translateY(0);}
-  .lightbox-frame{background:repeating-linear-gradient(135deg,#1b1b1b 0 2px,#141414 2px 26px); min-height:280px;}
-  .lightbox-info{padding:32px; border-left:1px solid var(--glass-border);}
-  .lightbox-info h3{font-size:30px; margin-bottom:18px;}
+  .lightbox-frame{
+    background:#050505; min-height:320px; position:relative;
+    display:flex; align-items:center; justify-content:center; overflow:hidden;
+  }
+  .lightbox-frame video{width:100%; height:100%; object-fit:contain; max-height:75vh;}
+  .lightbox-info{padding:36px; border-left:1px solid var(--glass-border); display:flex; flex-direction:column; justify-content:space-between; overflow-y:auto;}
+  .lightbox-info h3{font-size:32px; margin-bottom:18px;}
   .lb-meta-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:20px; padding-bottom:20px; border-bottom:1px solid var(--glass-border);}
   .lb-meta-grid span{display:block; font-size:9px; color:var(--grey); letter-spacing:.12em; margin-bottom:4px;}
   .lb-meta-grid b{font-size:12px; font-weight:500;}
-  .lightbox-info p{font-size:13px; line-height:1.7; color:#D8D8D2;}
+  .lightbox-info p{font-size:13px; line-height:1.75; color:#D8D8D2;}
   .lightbox-close{
-    position:absolute; top:14px; right:14px; z-index:5;
-    background:var(--glass); border:1px solid var(--glass-border); color:var(--paper);
-    font-family:inherit; font-size:10px; letter-spacing:.1em; padding:8px 12px;
+    position:absolute; top:14px; right:14px; z-index:10;
+    background:rgba(10,10,10,0.7); border:1px solid var(--glass-border); color:var(--paper);
+    font-family:inherit; font-size:10px; letter-spacing:.1em; padding:8px 12px; transition:all .2s;
   }
-  @media (max-width:700px){.lightbox-card{grid-template-columns:1fr;} .lightbox-info{border-left:none; border-top:1px solid var(--glass-border);}}
+  .lightbox-close:hover{background:var(--alarm); border-color:var(--alarm); color:var(--bg);}
+  @media (max-width:768px){
+    .lightbox-card{grid-template-columns:1fr; max-height:85vh; overflow-y:auto;} 
+    .lightbox-info{border-left:none; border-top:1px solid var(--glass-border); padding:24px;}
+    .lightbox-frame{min-height:220px;}
+  }
 
   /* ---------- REEL ---------- */
   .reel{padding:0 28px 60px; border-bottom:1px solid var(--line);}
-  .reel-frame{
+  .reel-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:24px;
     margin-top:24px;
+  }
+  .reel-card{
+    display:flex;
+    flex-direction:column;
+    background:rgba(10,10,10,0.4);
     border:1px solid var(--line);
-    aspect-ratio:16/7;
+    padding:16px;
+    transition:border-color .3s ease;
+  }
+  .reel-card:hover{
+    border-color:var(--glass-border);
+  }
+  .reel-badge{
+    font-size:10px;
+    letter-spacing:0.14em;
+    color:var(--alarm);
+    font-weight:700;
+    margin-bottom:12px;
+    text-transform:uppercase;
+  }
+  .reel-frame{
+    aspect-ratio:16/9;
+    width:100%;
     position:relative;
-    background:repeating-linear-gradient(45deg,#141414 0 2px,#0d0d0d 2px 30px);
-    display:flex; align-items:center; justify-content:center;
+    background:#000;
+    border:1px solid var(--line);
     overflow:hidden;
   }
-  .play-btn{
-    width:74px; height:74px; border-radius:50%; border:1px solid var(--glass-border);
-    background:var(--glass); backdrop-filter:blur(10px) saturate(160%); -webkit-backdrop-filter:blur(10px) saturate(160%);
-    display:flex; align-items:center; justify-content:center;
-    font-size:20px; transition:background .25s ease, border-color .25s ease, transform .15s ease; color:var(--paper);
+  .reel-meta{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-top:14px;
+    font-size:11px;
+    color:var(--grey);
+    gap:12px;
   }
-  .play-btn:hover{background:var(--alarm); border-color:var(--alarm); color:var(--bg);}
-  .scrub{
-    position:absolute; left:0; right:0; bottom:0;
-    display:flex; align-items:center; gap:10px;
-    padding:10px 16px; border-top:1px solid var(--glass-border);
-    font-size:10px; color:var(--grey);
-    background:rgba(10,10,10,0.35); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  .reel-title{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:14px;
+    color:var(--paper);
+    text-transform:uppercase;
+    margin-bottom:4px;
   }
-  .scrub-bar{flex:1; height:2px; background:var(--line); position:relative; cursor:pointer;}
-  .scrub-fill{position:absolute; left:0; top:0; bottom:0; width:0%; background:var(--alarm); transition:width .1s linear;}
-  .scrub-bar:hover .scrub-fill{box-shadow:0 0 8px var(--alarm);}
+  .reel-yt-link{
+    color:var(--alarm);
+    text-decoration:underline;
+    letter-spacing:0.1em;
+    font-size:10px;
+    white-space:nowrap;
+  }
 
   /* ---------- ABOUT ---------- */
   .about{
@@ -314,9 +418,9 @@
   .about-copy{padding:44px 28px; border-right:1px solid var(--line);}
   .about-copy p{font-size:15px; line-height:1.75; color:#D8D8D2; max-width:560px; margin-bottom:16px;}
   .about-copy p:first-of-type{font-family:'Space Grotesk',sans-serif; font-size:22px; font-weight:500; text-transform:none; color:var(--paper);}
-  .spec-list{padding:32px; margin:12px 28px 12px 12px;}
+  .spec-list{padding:32px; margin:24px 28px 24px 24px; border:1px solid var(--glass-border);}
   .spec-row{
-    display:flex; justify-content:space-between; padding:11px 0;
+    display:flex; justify-content:space-between; padding:12px 0;
     border-bottom:1px solid var(--glass-border); font-size:12px;
   }
   .spec-row:last-child{border-bottom:none;}
@@ -338,8 +442,9 @@
   /* ---------- CLIENTS TICKER ---------- */
   .ticker-wrap{
     border-bottom:1px solid var(--line);
-    overflow:hidden; padding:20px 0;
+    overflow:hidden; padding:22px 0;
     white-space:nowrap;
+    background:rgba(10,10,10,0.5);
   }
   .ticker{
     display:inline-block;
@@ -359,10 +464,37 @@
     flex-wrap:wrap; gap:20px; border-bottom:1px solid var(--line); padding-bottom:40px;
   }
   .cta-line h2{font-size:clamp(32px,7vw,84px);}
-  .cta-line a.mail{
-    font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(22px,4vw,34px);
-    text-transform:none; border-bottom:2px solid var(--alarm); display:inline-block;
+  .contact-container {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 24px;
   }
+  .contact-block {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 6px;
+  }
+  .cta-line a.mail, .cta-line a.phone{
+    font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(20px,3.8vw,34px);
+    text-transform:none; border-bottom:2px solid var(--alarm); display:inline-block; transition:color .2s;
+  }
+  .cta-line a.mail:hover, .cta-line a.phone:hover{color:var(--alarm);}
+  .copy-btn {
+    font-size: 10px; letter-spacing: 0.12em; color: var(--grey);
+    border: 1px solid var(--line); padding: 4px 10px; transition: all 0.2s;
+  }
+  .copy-btn:hover { border-color: var(--alarm); color: var(--paper); }
+  .whatsapp-note {
+    font-size: 10px; letter-spacing: 0.14em; color: var(--alarm); font-weight: 700; text-transform: uppercase;
+    display: flex; align-items: center; gap: 6px;
+  }
+  
+  /* Toast Notification */
+  .toast {
+    position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+    padding: 12px 20px; background: var(--alarm); color: var(--bg);
+    font-weight: 700; font-size: 11px; letter-spacing: 0.14em;
+    transform: translateY(100px); opacity: 0; transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(255,46,0,0.4);
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+
   .foot-bottom{
     display:flex; justify-content:space-between; flex-wrap:wrap; gap:14px;
     padding-top:22px; font-size:11px; color:var(--grey); letter-spacing:.08em;
@@ -373,10 +505,11 @@
 
   @media (max-width:860px){
     .work-grid{grid-template-columns:1fr;}
-    .work-item, .work-item:nth-child(odd), .work-item:nth-child(even){grid-column:span 1; border-right:none;}
+    .work-item, .work-item:nth-child(n){grid-column:span 1 !important; border-right:none;}
+    .reel-grid{grid-template-columns:1fr;}
     .about{grid-template-columns:1fr;}
     .about-copy{border-right:none; border-bottom:1px solid var(--line);}
-    .spec-list{margin:0 0 0 0;}
+    .spec-list{margin:24px 0 0 0;}
     .cs-row{grid-template-columns:44px 1fr;}
     .cs-row > div:nth-child(3), .cs-row > div:nth-child(4){display:none;}
     nav{display:none;}
@@ -403,23 +536,25 @@
 <div class="bracket bl" id="bbl"></div>
 <div class="bracket br" id="bbr"></div>
 
+<div class="toast" id="toast">COPIED TO CLIPBOARD</div>
+
 <header>
   <div class="logo">JOY<span>·</span>CHAKRABARTY<br><span style="font-size:9px; letter-spacing:.18em; color:var(--grey); font-weight:500;">PEAKSANIMA</span></div>
   <nav>
     <a href="#work">Work</a>
-    <a href="#reel">Short Film</a>
+    <a href="#reel">Films &amp; Videos</a>
     <a href="#about">About</a>
     <a href="#capabilities">Capabilities</a>
     <a href="#contact">Contact</a>
   </nav>
   <div class="rec-tag"><span class="rec-dot"></span> REC <span id="timecode">00:00:00:00</span></div>
-  <button class="menu-btn" id="menuOpen">MENU</button>
+  <button class="menu-btn" id="menuOpen" aria-label="Open Navigation Menu">MENU</button>
 </header>
 
 <div class="mobile-menu" id="mobileMenu">
-  <button class="mobile-menu-close" id="menuClose">CLOSE ✕</button>
+  <button class="mobile-menu-close" id="menuClose" aria-label="Close Menu">CLOSE ✕</button>
   <a href="#work">Work</a>
-  <a href="#reel">Short Film</a>
+  <a href="#reel">Films &amp; Videos</a>
   <a href="#about">About</a>
   <a href="#capabilities">Capabilities</a>
   <a href="#contact">Contact</a>
@@ -430,95 +565,231 @@
   <div class="hero-frame-label right">LAT 28.6°N — DEL<br>SHOOTING NOW</div>
   <h1>Direction.<br>Camera.<br><span class="accent">Craft.</span></h1>
   <div class="hero-sub">
-    <p>I'm Joy Chakrabarty, the director, assistant director, and DOP behind PeakSanima — a studio built around campaign film, motion, and stills for brands who want their world shot like it matters. Based in Delhi — shooting everywhere.</p>
-    <div class="scroll-cue">▼ SCROLL — 001 / 006</div>
+    <p>I'm Joy Chakrabarty, the director, assistant director, and DOP behind PeakSanima — a studio built around campaign film, motion, and stills for brands who want their world shot like it matters. Based in Delhi — shooting worldwide.</p>
+    <div class="scroll-cue">▼ SCROLL — 001 / 010</div>
   </div>
 </section>
 
 <div class="section-head reveal" id="work">
   <h2>Selected Work</h2>
-  <div class="eyebrow">06 Projects — 2024–2026 — click any frame</div>
+  <div class="eyebrow">10 Projects — 2024–2026 — Click frame to view</div>
 </div>
+
 <div class="work-grid">
-  <div class="work-item reveal" data-title="Project 01" data-role="DOP / Director" data-year="2026" data-format="Campaign Film" data-desc="Campaign film work directed and shot through PeakSanima. Swap in the real project details here.">
-   <div class="frame">
-  <video
-    autoplay
-    muted
-    loop
-    playsinline
-    style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
-    <source src="IndiePhotography%20Reel%201.mp4" type="video/mp4">
-  </video>
-
-  <div class="sheen"></div>
-
-  <div class="work-meta">
-    <span class="name">Project 01</span>
-    <span class="tag">Campaign Film</span>
-  </div>
-</div>
+  <!-- Project 01 -->
+  <div class="work-item reveal" data-video="IndiePhotography%20Reel%201.mp4" data-title="Project 01" data-role="DOP / Director" data-year="2026" data-format="Campaign Film" data-desc="Campaign film work directed and shot through PeakSanima. Focused on high-contrast lighting, tactile textures, and dynamic visual narrative designed for brand engagement.">
+    <div class="frame">
+      <video autoplay muted loop playsinline preload="metadata" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+        <source src="IndiePhotography%20Reel%201.mp4" type="video/mp4">
+      </video>
+      <div class="sheen"></div>
+      <div class="work-meta">
+        <span class="name">Project 01</span>
+      </div>
+    </div>
     <div class="work-code">P.01 — <b>DOP/DIR</b></div>
     <div class="work-view glass">VIEW →</div>
   </div>
-  <div class="work-item reveal" data-title="Project 02" data-role="Editor / DOP" data-year="2026" data-format="AI Generated Trailer" data-desc="An AI-generated cinematic trailer edited and photographed by Joy Chakrabarty. Responsible for editing, visual storytelling, pacing, and cinematography.">
+
+  <!-- Project 02 -->
+  <div class="work-item reveal" data-video="Tesu%20Cg.mp4" data-title="Project 02" data-role="DOP" data-year="2026" data-format="Brand Campaign" data-desc="Brand campaign film shot for Café Tesu by Joy Chakrabarty. Highlighting atmospheric coffee culture, detailed craft cinematography, architectural lines, and refined lighting.">
     <div class="frame">
-  <video autoplay muted loop playsinline style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
-    <source src="Teaser-2.mp4" type="video/mp4">
-  </video>
-  <div class="sheen"></div>
-  <div class="work-meta"><span class="name">Project 02</span><span class="tag">AI Trailer</span></div>
-</div>
-    <div class="work-code">P.02 — <b>DIR</b></div>
+      <video autoplay muted loop playsinline preload="metadata" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+        <source src="Tesu%20Cg.mp4" type="video/mp4">
+      </video>
+      <div class="sheen"></div>
+      <div class="work-meta">
+        <span class="name">Project 02</span>
+      </div>
+    </div>
+    <div class="work-code">P.02 — <b>DOP</b></div>
     <div class="work-view glass">VIEW →</div>
   </div>
-  <div class="work-item reveal" data-title="Project 03" data-role="DOP / Editor" data-year="2024" data-format="Cinematic Film" data-desc="A cinematic visual sequence photographed and edited by Joy Chakrabarty. Focused on atmospheric storytelling, cinematic lighting, composition, and post-production.">
+
+  <!-- Project 03 -->
+  <div class="work-item reveal" data-video="Sequence%2001.mp4" data-title="Project 03" data-role="DOP / Editor" data-year="2024" data-format="Visual Narrative" data-desc="A visual sequence photographed and edited by Joy Chakrabarty. Focused on atmospheric storytelling, lighting, moody composition, and precise post-production color grade.">
     <div class="frame">
-  <video autoplay muted loop playsinline style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
-    <source src="Sequence 01.mp4" type="video/mp4">
-  </video>
-  <div class="sheen"></div>
-  <div class="work-meta"><span class="name">Project 03</span><span class="tag">Cinematic Film</span></div>
-</div>
+      <video autoplay muted loop playsinline preload="metadata" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+        <source src="Sequence%2001.mp4" type="video/mp4">
+      </video>
+      <div class="sheen"></div>
+      <div class="work-meta">
+        <span class="name">Project 03</span>
+      </div>
+    </div>
     <div class="work-code">P.03 — <b>DOP/DIR</b></div>
     <div class="work-view glass">VIEW →</div>
   </div>
-  <div class="work-item reveal" data-title="Project 04" data-role="Director / DOP" data-year="2025" data-format="Cinematic Film" data-desc="A cinematic narrative film directed and photographed by Joy Chakrabarty. Responsible for the visual direction, cinematography, and on-set creative execution, with a focus on emotional storytelling and cinematic composition.">
+
+  <!-- Project 04 -->
+  <div class="work-item reveal" data-video="Uditi.mp4" data-title="Project 04" data-role="Director / DOP" data-year="2025" data-format="Narrative Film" data-desc="A narrative film directed and photographed by Joy Chakrabarty. Responsible for the overall visual direction, camera operator work, and on-set creative execution, highlighting emotional depth.">
     <div class="frame">
-  <video autoplay muted loop playsinline style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
-    <source src="Uditi.mp4" type="video/mp4">
-  </video>
-  <div class="sheen"></div>
-  <div class="work-meta"><span class="name">Project 04</span><span class="tag">Cinematic Film</span></div>
-</div>
+      <video autoplay muted loop playsinline preload="metadata" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+        <source src="Uditi.mp4" type="video/mp4">
+      </video>
+      <div class="sheen"></div>
+      <div class="work-meta">
+        <span class="name">Project 04</span>
+      </div>
+    </div>
     <div class="work-code">P.04 — <b>DIR</b></div>
     <div class="work-view glass">VIEW →</div>
   </div>
-  <div class="work-item reveal" data-title="Project 05" data-role="Editor / DOP" data-year="2026" data-format="Cinematic Sequence" data-desc="A cinematic visual sequence edited and photographed by Joy Chakrabarty. Responsible for cinematography, editing, pacing, and crafting a polished cinematic visual experience.">
+
+  <!-- Project 05 -->
+  <div class="work-item reveal" data-video="Batao%20Zara.mp4" data-title="Project 05" data-role="Director / DOP" data-year="2026" data-format="Music Video" data-desc="Music video and cinematic narrative for 'Batao Zara' by Aman Gulati. Directed, photographed, and edited by Joy Chakrabarty under PeakSanima.">
     <div class="frame">
-  <video autoplay muted loop playsinline style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
-    <source src="Sequence-1.mp4" type="video/mp4">
-  </video>
-  <div class="sheen"></div>
-  <div class="work-meta"><span class="name">Project 05</span><span class="tag">Cinematic Sequence</span></div>
-</div>
-    <div class="work-code">P.05 — <b>DOP</b></div>
+      <video autoplay muted loop playsinline preload="metadata" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+        <source src="Batao%20Zara.mp4" type="video/mp4">
+      </video>
+      <div class="sheen"></div>
+      <div class="work-meta">
+        <span class="name">Project 05</span>
+      </div>
+    </div>
+    <div class="work-code">P.05 — <b>DIR/DOP</b></div>
     <div class="work-view glass">VIEW →</div>
   </div>
-  <div class="work-item reveal" data-title="Project 06" data-role="Assistant Director" data-year="2024" data-format="Brand Film" data-desc="Brand film worked on as Assistant Director through PeakSanima. Swap in the real project details here.">
-    <div class="frame"><div class="sheen"></div><div class="work-meta"><span class="name">Project 06</span><span class="tag">Brand Film</span></div></div>
-    <div class="work-code">P.06 — <b>AD</b></div>
+
+  <!-- Project 06 -->
+  <div class="work-item reveal" data-video="Video-81125.mp4" data-title="Project 06" data-role="DOP / Editor" data-year="2026" data-format="Narrative Vignette" data-desc="A narrative vignette shot and edited by Joy Chakrabarty. Highlighting expressive character framing, natural lighting, and nuanced visual storytelling.">
+    <div class="frame">
+      <video autoplay muted loop playsinline preload="metadata" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+        <source src="Video-81125.mp4" type="video/mp4">
+      </video>
+      <div class="sheen"></div>
+      <div class="work-meta">
+        <span class="name">Project 06</span>
+      </div>
+    </div>
+    <div class="work-code">P.06 — <b>DOP/EDIT</b></div>
     <div class="work-view glass">VIEW →</div>
+  </div>
+</div>
+
+<!-- See More Projects Toggle Dropdown -->
+<div class="see-more-container reveal">
+  <button class="see-more-btn" id="seeMoreBtn" aria-expanded="false" aria-controls="moreProjectsWrapper">
+    <span>SEE MORE PROJECTS (<span id="moreCount">4</span>)</span>
+    <span class="chevron">▼</span>
+  </button>
+</div>
+
+<!-- Expandable Secondary Projects Grid -->
+<div class="more-projects-wrapper" id="moreProjectsWrapper">
+  <div class="work-grid more-grid">
+    <!-- Project 07 -->
+    <div class="work-item" data-video="Sequence-1.mp4" data-title="Project 07" data-role="DOP / Editor" data-year="2025" data-format="Visual Sequence" data-desc="A visual sequence edited and photographed by Joy Chakrabarty. Responsible for cinematography, edit pacing, rhythmic cuts, and delivering a polished visual impression.">
+      <div class="frame">
+        <video autoplay muted loop playsinline preload="metadata" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+          <source src="Sequence-1.mp4" type="video/mp4">
+        </video>
+        <div class="sheen"></div>
+        <div class="work-meta">
+          <span class="name">Project 07</span>
+        </div>
+      </div>
+      <div class="work-code">P.07 — <b>DOP</b></div>
+      <div class="work-view glass">VIEW →</div>
+    </div>
+
+    <!-- Project 08 -->
+    <div class="work-item" data-video="MediaX.mp4" data-title="Project 08" data-role="Director / DOP" data-year="2026" data-format="Media Promo" data-desc="A dynamic promotional video directed and photographed by Joy Chakrabarty for MediaX 2.0. Clean lighting, industrial texture, and punchy montage cuts.">
+      <div class="frame">
+        <video autoplay muted loop playsinline preload="metadata" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+          <source src="MediaX.mp4" type="video/mp4">
+        </video>
+        <div class="sheen"></div>
+        <div class="work-meta">
+          <span class="name">Project 08</span>
+        </div>
+      </div>
+      <div class="work-code">P.08 — <b>DIR/DOP</b></div>
+      <div class="work-view glass">VIEW →</div>
+    </div>
+
+    <!-- Project 09 -->
+    <div class="work-item" data-video="Teaser-2.mp4" data-title="Project 09" data-role="DOP / Editor" data-year="2025" data-format="Campaign Teaser" data-desc="A short campaign teaser edited and shot by Joy Chakrabarty under PeakSanima. High intensity cutdowns, rich color grade, and sound design.">
+      <div class="frame">
+        <video autoplay muted loop playsinline preload="metadata" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+          <source src="Teaser-2.mp4" type="video/mp4">
+        </video>
+        <div class="sheen"></div>
+        <div class="work-meta">
+          <span class="name">Project 09</span>
+        </div>
+      </div>
+      <div class="work-code">P.09 — <b>DOP/EDIT</b></div>
+      <div class="work-view glass">VIEW →</div>
+    </div>
+
+    <!-- Project 10 -->
+    <div class="work-item" data-video="Video-1352.mp4" data-title="Project 10" data-role="Director / DOP" data-year="2026" data-format="Brand Motion" data-desc="Project 10 visual reel. Directed, shot, and edited by Joy Chakrabarty for PeakSanima.">
+      <div class="frame">
+        <video autoplay muted loop playsinline preload="metadata" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+          <source src="Video-1352.mp4" type="video/mp4">
+        </video>
+        <div class="sheen"></div>
+        <div class="work-meta">
+          <span class="name">Project 10</span>
+        </div>
+      </div>
+      <div class="work-code">P.10 — <b>DIR/DOP</b></div>
+      <div class="work-view glass">VIEW →</div>
+    </div>
   </div>
 </div>
 
 <div class="section-head reveal" id="reel">
-  <h2>Short Film</h2>
-  <div class="eyebrow">DIR / DOP — 2025</div>
+  <h2>Short Film &amp; Music Videos</h2>
+  <div class="eyebrow">03 Featured Releases — DIR / DOP</div>
 </div>
 <div class="reel reveal">
-  <div class="reel-frame" id="reelFrame">
-    <iframe src="https://www.youtube.com/embed/yQDOktnW1s8" title="Short Film — Joy Chakrabarty" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute; inset:0; width:100%; height:100%; border:0;"></iframe>
+  <div class="reel-grid">
+    <!-- Item 1: Short Film -->
+    <div class="reel-card">
+      <div class="reel-badge">SHORT FILM</div>
+      <div class="reel-frame">
+        <iframe src="https://www.youtube-nocookie.com/embed/yQDOktnW1s8?rel=0&enablejsapi=1" title="TRYING | Short Film" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute; inset:0; width:100%; height:100%; border:0;"></iframe>
+      </div>
+      <div class="reel-meta">
+        <div>
+          <div class="reel-title">TRYING</div>
+          <div>Short Film by Joy Chakrabarty</div>
+        </div>
+        <a class="reel-yt-link" href="https://www.youtube.com/watch?v=yQDOktnW1s8" target="_blank" rel="noopener">YOUTUBE ↗</a>
+      </div>
+    </div>
+
+    <!-- Item 2: Music Video 1 -->
+    <div class="reel-card">
+      <div class="reel-badge">MUSIC VIDEO</div>
+      <div class="reel-frame">
+        <iframe src="https://www.youtube-nocookie.com/embed/ovAeSw8LhpA?rel=0&enablejsapi=1" title="Batao Zara | Official Music Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute; inset:0; width:100%; height:100%; border:0;"></iframe>
+      </div>
+      <div class="reel-meta">
+        <div>
+          <div class="reel-title">BATAO ZARA</div>
+          <div>Aman Gulati — Official Music Video</div>
+        </div>
+        <a class="reel-yt-link" href="https://youtu.be/ovAeSw8LhpA?si=cjRhIfBSUo3uHSq4" target="_blank" rel="noopener">YOUTUBE ↗</a>
+      </div>
+    </div>
+
+    <!-- Item 3: Music Video 2 -->
+    <div class="reel-card">
+      <div class="reel-badge">MUSIC VIDEO</div>
+      <div class="reel-frame">
+        <iframe src="https://www.youtube-nocookie.com/embed/Jv1vM9ZyZ0I?rel=0&enablejsapi=1" title="Tu Chahiye | Official Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute; inset:0; width:100%; height:100%; border:0;"></iframe>
+      </div>
+      <div class="reel-meta">
+        <div>
+          <div class="reel-title">TU CHAHIYE</div>
+          <div>Devanshu — Official Video</div>
+        </div>
+        <a class="reel-yt-link" href="https://youtu.be/Jv1vM9ZyZ0I?si=mhP9ZlZJchrOp662" target="_blank" rel="noopener">YOUTUBE ↗</a>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -531,7 +802,7 @@
     <p>I run PeakSanima, a Delhi-based studio directing and shooting campaign films and brand stills — the kind of work that sits somewhere between advertising and documentary, built on real light and real locations.</p>
     <p>Three years in, I've moved between sets as a Director, an Assistant Director, and a DOP — a one-person crew with a camera bag and a hard drive when the job calls for it. Every job at PeakSanima gets treated like the film it could be, not just the deliverable it needs to be.</p>
     <p>I've shot brand and campaign work for Hyundai, Stay Perfumes, The Kebab Factory, Cafe Tesu, Yes Minister, and Evens, alongside content shoots for creators like @wokenupsid and @eshaanduggal.</p>
-    <p>Available for commissions worldwide. Studio based in Delhi.</p>
+    <p>Available for commissions worldwide. Studio based in Delhi, India.</p>
   </div>
   <div class="spec-list glass reveal">
     <div class="spec-row"><span>YEARS SHOOTING</span><span>3</span></div>
@@ -571,7 +842,16 @@
 <footer id="contact">
   <div class="cta-line reveal">
     <h2>Let's<br>make it.</h2>
-    <a class="mail" id="mailLink" href="mailto:joychakrabarty24@gmail.com">joychakrabarty24@gmail.com</a>
+    <div class="contact-container">
+      <div class="contact-block">
+        <a class="mail" id="mailLink" href="mailto:joychakrabarty24@gmail.com">joychakrabarty24@gmail.com</a>
+        <button class="copy-btn" id="copyEmailBtn">COPY EMAIL</button>
+      </div>
+      <div class="contact-block">
+        <a class="phone" id="phoneLink" href="https://wa.me/919911764806" target="_blank" rel="noopener">+91 9911764806</a>
+        <span class="whatsapp-note">⚡ WHATSAPP CALLS ONLY</span>
+      </div>
+    </div>
   </div>
   <div class="foot-bottom">
     <span>© 2026 PEAKSANIMA — JOY CHAKRABARTY — <span class="cut">CUT.</span></span>
@@ -582,19 +862,22 @@
   </div>
 </footer>
 
-<div class="lightbox" id="lightbox">
+<div class="lightbox" id="lightbox" aria-hidden="true" role="dialog">
   <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
   <div class="lightbox-card glass">
-    <button class="lightbox-close" id="lightboxClose">✕ CLOSE</button>
-    <div class="lightbox-frame"></div>
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close modal">✕ CLOSE</button>
+    <div class="lightbox-frame" id="lbFrame">
+    </div>
     <div class="lightbox-info">
-      <h3 id="lbTitle">Title</h3>
-      <div class="lb-meta-grid">
-        <div><span>ROLE</span><b id="lbRole">—</b></div>
-        <div><span>YEAR</span><b id="lbYear">—</b></div>
-        <div><span>FORMAT</span><b id="lbFormat">—</b></div>
+      <div>
+        <h3 id="lbTitle">Title</h3>
+        <div class="lb-meta-grid">
+          <div><span>ROLE</span><b id="lbRole">—</b></div>
+          <div><span>YEAR</span><b id="lbYear">—</b></div>
+          <div><span>FORMAT</span><b id="lbFormat">—</b></div>
+        </div>
+        <p id="lbDesc"></p>
       </div>
-      <p id="lbDesc"></p>
     </div>
   </div>
 </div>
@@ -604,7 +887,7 @@
   const isTouch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
   const isDesktop = window.matchMedia('(min-width: 861px)').matches;
 
-  // ---------- timecode ticker ----------
+  // ---------- Timecode Ticker ----------
   const tc = document.getElementById('timecode');
   const start = Date.now();
   function pad(n){return n.toString().padStart(2,'0');}
@@ -620,7 +903,7 @@
   }
   updateTC();
 
-  // ---------- custom glass cursor (desktop only) ----------
+  // ---------- Custom Glass Cursor ----------
   const cursorDot = document.getElementById('cursorDot');
   const cursorRing = document.getElementById('cursorRing');
   let ringX = window.innerWidth/2, ringY = window.innerHeight/2, mouseX = ringX, mouseY = ringY;
@@ -647,7 +930,7 @@
     document.body.classList.remove('no-cursor');
   }
 
-  // ---------- viewfinder lens + brackets (hero only, desktop) ----------
+  // ---------- Viewfinder Lens & Brackets ----------
   const hero = document.getElementById('hero');
   const lens = document.getElementById('lens');
   const brackets = [document.getElementById('btl'),document.getElementById('btr'),document.getElementById('bbl'),document.getElementById('bbr')];
@@ -669,13 +952,32 @@
     });
   }
 
-  // ---------- mobile glass menu ----------
+  // ---------- See More Dropdown Toggle ----------
+  const seeMoreBtn = document.getElementById('seeMoreBtn');
+  const moreProjectsWrapper = document.getElementById('moreProjectsWrapper');
+
+  seeMoreBtn.addEventListener('click', () => {
+    const isExpanded = seeMoreBtn.getAttribute('aria-expanded') === 'true';
+    if (isExpanded) {
+      moreProjectsWrapper.classList.remove('expanded');
+      seeMoreBtn.classList.remove('active');
+      seeMoreBtn.setAttribute('aria-expanded', 'false');
+      seeMoreBtn.querySelector('span:first-child').textContent = 'SEE MORE PROJECTS (4)';
+    } else {
+      moreProjectsWrapper.classList.add('expanded');
+      seeMoreBtn.classList.add('active');
+      seeMoreBtn.setAttribute('aria-expanded', 'true');
+      seeMoreBtn.querySelector('span:first-child').textContent = 'HIDE EXTRA PROJECTS';
+    }
+  });
+
+  // ---------- Mobile Glass Menu ----------
   const mobileMenu = document.getElementById('mobileMenu');
   document.getElementById('menuOpen').addEventListener('click', ()=>mobileMenu.classList.add('open'));
   document.getElementById('menuClose').addEventListener('click', ()=>mobileMenu.classList.remove('open'));
   mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>mobileMenu.classList.remove('open')));
 
-  // ---------- scroll reveal ----------
+  // ---------- Scroll Reveal ----------
   const revealEls = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries)=>{
     entries.forEach((entry, i)=>{
@@ -684,11 +986,12 @@
         io.unobserve(entry.target);
       }
     });
-  }, {threshold:0.15});
+  }, {threshold:0.12});
   revealEls.forEach(el=>io.observe(el));
 
-  // ---------- magnetic buttons ----------
+  // ---------- Magnetic Button ----------
   function magnetize(el, strength){
+    if(!el) return;
     el.addEventListener('mousemove', (e)=>{
       const r = el.getBoundingClientRect();
       const x = e.clientX - r.left - r.width/2;
@@ -699,10 +1002,12 @@
   }
   if(isDesktop && !isTouch && !reduceMotion){
     magnetize(document.getElementById('mailLink'), 0.25);
+    magnetize(document.getElementById('phoneLink'), 0.25);
   }
 
-  // ---------- lightbox ----------
+  // ---------- Interactive Lightbox Player ----------
   const lightbox = document.getElementById('lightbox');
+  const lbFrame = document.getElementById('lbFrame');
   const lbFields = {
     title: document.getElementById('lbTitle'),
     role: document.getElementById('lbRole'),
@@ -710,25 +1015,68 @@
     format: document.getElementById('lbFormat'),
     desc: document.getElementById('lbDesc'),
   };
+
   function openLightbox(item){
     lbFields.title.textContent = item.dataset.title;
     lbFields.role.textContent = item.dataset.role;
     lbFields.year.textContent = item.dataset.year;
     lbFields.format.textContent = item.dataset.format;
     lbFields.desc.textContent = item.dataset.desc;
+
+    lbFrame.innerHTML = '';
+    const videoSrc = item.dataset.video;
+    
+    if(videoSrc && videoSrc.trim() !== '') {
+      const vid = document.createElement('video');
+      vid.controls = true;
+      vid.autoplay = true;
+      vid.playsInline = true;
+      const src = document.createElement('source');
+      src.src = videoSrc;
+      src.type = 'video/mp4';
+      vid.appendChild(src);
+      lbFrame.appendChild(vid);
+    } else {
+      lbFrame.innerHTML = '<div class="placeholder-pattern"><span>[ PREVIEW NOT AVAILABLE ]</span></div>';
+    }
+
     lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
   }
+
   function closeLightbox(){
     lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    lbFrame.innerHTML = '';
   }
-  document.querySelectorAll('.work-item').forEach(item=>{
+
+  const allWorkItems = document.querySelectorAll('.work-item');
+  allWorkItems.forEach(item=>{
     item.addEventListener('click', ()=>openLightbox(item));
+    item.addEventListener('keydown', (e)=>{ if(e.key === 'Enter') openLightbox(item); });
   });
+
   document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
   document.getElementById('lightboxBackdrop').addEventListener('click', closeLightbox);
   document.addEventListener('keydown', (e)=>{if(e.key==='Escape') closeLightbox();});
+
+  // ---------- Toast & Copy Email ----------
+  const toast = document.getElementById('toast');
+  const copyBtn = document.getElementById('copyEmailBtn');
+
+  function triggerToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2800);
+  }
+
+  copyBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText('joychakrabarty24@gmail.com').then(() => {
+      triggerToast('EMAIL COPIED TO CLIPBOARD');
+    });
+  });
 </script>
 
 </body>
