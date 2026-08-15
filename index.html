@@ -103,6 +103,7 @@
     background:rgba(10,10,10,0.65);
     backdrop-filter:blur(var(--glass-blur)) saturate(160%);
     -webkit-backdrop-filter:blur(var(--glass-blur)) saturate(160%);
+    gap: 16px;
   }
   .logo{
     font-family:'Space Grotesk', sans-serif;
@@ -120,6 +121,13 @@
     background:var(--alarm); transition:width .25s ease;
   }
   nav a:hover::after{width:100%;}
+  
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
   .rec-tag{
     display:flex; align-items:center; gap:8px;
     font-size:11px; letter-spacing:0.1em; color:var(--grey);
@@ -130,6 +138,66 @@
     animation:blink 1.4s steps(1) infinite;
   }
   @keyframes blink{50%{opacity:0.15;}}
+
+  /* ---------- BGM AUDIO CONTROL WIDGET ---------- */
+  .bgm-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    padding: 6px 12px;
+    border: 1px solid var(--glass-border);
+    background: var(--glass);
+    color: var(--paper);
+    border-radius: 20px;
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .bgm-btn:hover {
+    border-color: var(--alarm);
+    background: var(--glass-strong);
+  }
+  .bgm-btn.active {
+    border-color: var(--alarm);
+    background: rgba(255, 46, 0, 0.12);
+    box-shadow: 0 0 12px rgba(255, 46, 0, 0.25);
+  }
+  .bgm-btn .bgm-text {
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .bgm-btn.active .bgm-text {
+    color: var(--alarm);
+  }
+  .sound-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 12px;
+    width: 14px;
+  }
+  .sound-bars .bar {
+    width: 2px;
+    height: 25%;
+    background: var(--grey);
+    border-radius: 1px;
+    transition: height 0.2s ease, background 0.3s ease;
+  }
+  .bgm-btn.active .sound-bars .bar {
+    background: var(--alarm);
+    animation: soundWave 1.2s infinite ease-in-out alternate;
+  }
+  .bgm-btn.active .sound-bars .bar:nth-child(1) { animation-delay: 0.1s; }
+  .bgm-btn.active .sound-bars .bar:nth-child(2) { animation-delay: 0.35s; }
+  .bgm-btn.active .sound-bars .bar:nth-child(3) { animation-delay: 0.2s; }
+  .bgm-btn.active .sound-bars .bar:nth-child(4) { animation-delay: 0.45s; }
+
+  @keyframes soundWave {
+    0% { height: 20%; }
+    50% { height: 100%; }
+    100% { height: 35%; }
+  }
+
   .menu-btn{display:none; background:none; border:1px solid var(--glass-border); color:var(--paper); font-family:inherit; font-size:11px; padding:8px 12px; letter-spacing:.1em;}
 
   /* ---------- MOBILE GLASS MENU ---------- */
@@ -528,6 +596,14 @@
 </head>
 <body class="no-cursor">
 
+<!-- ================================================================= -->
+<!-- BACKGROUND MUSIC AUDIO TRACK -->
+<!-- ================================================================= -->
+<audio id="bgmAudio" loop preload="auto">
+  <source src="ridgeclub%20-%20do%20i%20clench%20my%20fists_.mp3" type="audio/mpeg">
+  <source src="ridgeclub - do i clench my fists_.mp3" type="audio/mpeg">
+</audio>
+
 <div class="cursor-dot" id="cursorDot"></div>
 <div class="cursor-ring" id="cursorRing"><span>VIEW</span></div>
 <div class="lens" id="lens"></div>
@@ -547,8 +623,22 @@
     <a href="#capabilities">Capabilities</a>
     <a href="#contact">Contact</a>
   </nav>
-  <div class="rec-tag"><span class="rec-dot"></span> REC <span id="timecode">00:00:00:00</span></div>
-  <button class="menu-btn" id="menuOpen" aria-label="Open Navigation Menu">MENU</button>
+  
+  <div class="header-actions">
+    <!-- BGM Control Button -->
+    <button class="bgm-btn" id="bgmBtn" aria-label="Toggle Background Music">
+      <div class="sound-bars" aria-hidden="true">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+      <span class="bgm-text" id="bgmText">BGM: OFF</span>
+    </button>
+    
+    <div class="rec-tag"><span class="rec-dot"></span> REC <span id="timecode">00:00:00:00</span></div>
+    <button class="menu-btn" id="menuOpen" aria-label="Open Navigation Menu">MENU</button>
+  </div>
 </header>
 
 <div class="mobile-menu" id="mobileMenu">
@@ -903,6 +993,107 @@
   }
   updateTC();
 
+  // ---------- BGM CONTROLLER & SOUNDWAVE ANIMATION ----------
+  const bgmAudio = document.getElementById('bgmAudio');
+  const bgmBtn = document.getElementById('bgmBtn');
+  const bgmText = document.getElementById('bgmText');
+  let isBgmPlaying = false;
+  let bgmWasPlayingBeforeLightbox = false;
+  let fadeInterval = null;
+  const TARGET_VOLUME = 0.25; // Updated to 25% volume
+
+  // Set initial volume
+  bgmAudio.volume = TARGET_VOLUME;
+
+  // Smooth Volume Fade In / Out Helper
+  function fadeBgmVolume(targetVol, duration = 800, onComplete = null) {
+    if (fadeInterval) clearInterval(fadeInterval);
+    const startVol = bgmAudio.volume;
+    const steps = 25;
+    const stepTime = duration / steps;
+    const volChange = (targetVol - startVol) / steps;
+    let currentStep = 0;
+
+    fadeInterval = setInterval(() => {
+      currentStep++;
+      let newVol = startVol + (volChange * currentStep);
+      if ((volChange > 0 && newVol >= targetVol) || (volChange < 0 && newVol <= targetVol)) {
+        newVol = targetVol;
+        clearInterval(fadeInterval);
+        if (onComplete) onComplete();
+      }
+      bgmAudio.volume = Math.max(0, Math.min(1, newVol));
+    }, stepTime);
+  }
+
+  function playBgm() {
+    bgmAudio.volume = TARGET_VOLUME;
+    const playPromise = bgmAudio.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        isBgmPlaying = true;
+        bgmBtn.classList.add('active');
+        bgmText.textContent = 'BGM: ON';
+      }).catch(err => {
+        console.warn('Autoplay blocked by browser policy:', err);
+        isBgmPlaying = false;
+        bgmBtn.classList.remove('active');
+        bgmText.textContent = 'BGM: OFF';
+      });
+    }
+  }
+
+  function pauseBgm(fade = true) {
+    if (!isBgmPlaying) return;
+    isBgmPlaying = false;
+    bgmBtn.classList.remove('active');
+    bgmText.textContent = 'BGM: OFF';
+    
+    if (fade) {
+      fadeBgmVolume(0, 600, () => bgmAudio.pause());
+    } else {
+      bgmAudio.pause();
+      bgmAudio.volume = 0;
+    }
+  }
+
+  function toggleBgm() {
+    if (isBgmPlaying) {
+      pauseBgm(true);
+    } else {
+      playBgm();
+    }
+  }
+
+  bgmBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleBgm();
+  });
+
+  // Enable audio on first user touch/click/key interaction
+  function handleFirstUserGesture() {
+    if (!isBgmPlaying) {
+      playBgm();
+    }
+    ['click', 'touchstart', 'keydown', 'pointerdown'].forEach(evt => {
+      document.removeEventListener(evt, handleFirstUserGesture);
+    });
+  }
+
+  ['click', 'touchstart', 'keydown', 'pointerdown'].forEach(evt => {
+    document.addEventListener(evt, handleFirstUserGesture, { once: true });
+  });
+
+  // Optional: Auto-start background music on first user click anywhere on page
+  function handleFirstUserGesture() {
+    if (!isBgmPlaying && bgmAudio.paused) {
+      playBgm();
+    }
+    document.removeEventListener('click', handleFirstUserGesture);
+  }
+  document.addEventListener('click', handleFirstUserGesture, { once: true });
+
+
   // ---------- Custom Glass Cursor ----------
   const cursorDot = document.getElementById('cursorDot');
   const cursorRing = document.getElementById('cursorRing');
@@ -1017,6 +1208,14 @@
   };
 
   function openLightbox(item){
+    // Pause background music during lightbox video playback so audio doesn't clash!
+    if (isBgmPlaying) {
+      bgmWasPlayingBeforeLightbox = true;
+      pauseBgm(true);
+    } else {
+      bgmWasPlayingBeforeLightbox = false;
+    }
+
     lbFields.title.textContent = item.dataset.title;
     lbFields.role.textContent = item.dataset.role;
     lbFields.year.textContent = item.dataset.year;
@@ -1050,6 +1249,11 @@
     lightbox.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
     lbFrame.innerHTML = '';
+
+    // Resume background music if it was active before opening lightbox
+    if (bgmWasPlayingBeforeLightbox) {
+      playBgm();
+    }
   }
 
   const allWorkItems = document.querySelectorAll('.work-item');
