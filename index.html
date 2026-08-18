@@ -596,9 +596,6 @@
 </head>
 <body class="no-cursor">
 
-<!-- ================================================================= -->
-<!-- BACKGROUND MUSIC AUDIO TRACK -->
-<!-- ================================================================= -->
 <audio id="bgmAudio" loop preload="auto">
   <source src="ridgeclub%20-%20do%20i%20clench%20my%20fists_.mp3" type="audio/mpeg">
   <source src="ridgeclub - do i clench my fists_.mp3" type="audio/mpeg">
@@ -938,7 +935,7 @@
         <button class="copy-btn" id="copyEmailBtn">COPY EMAIL</button>
       </div>
       <div class="contact-block">
-        <a class="phone" id="phoneLink" href="https://wa.me/919911764806" target="_blank" rel="noopener">+91 9911764806</a>
+        <a class="phone" id="phoneLink" href="https://wa.me/919608776034" target="_blank" rel="noopener">+91 9608776034</a>
         <span class="whatsapp-note">⚡ WHATSAPP CALLS ONLY</span>
       </div>
     </div>
@@ -1000,12 +997,10 @@
   let isBgmPlaying = false;
   let bgmWasPlayingBeforeLightbox = false;
   let fadeInterval = null;
-  const TARGET_VOLUME = 0.25; // Updated to 25% volume
+  const TARGET_VOLUME = 0.25;
 
-  // Set initial volume
   bgmAudio.volume = TARGET_VOLUME;
 
-  // Smooth Volume Fade In / Out Helper
   function fadeBgmVolume(targetVol, duration = 800, onComplete = null) {
     if (fadeInterval) clearInterval(fadeInterval);
     const startVol = bgmAudio.volume;
@@ -1070,9 +1065,8 @@
     toggleBgm();
   });
 
-  // Enable audio on first user touch/click/key interaction
   function handleFirstUserGesture() {
-    if (!isBgmPlaying) {
+    if (!isBgmPlaying && bgmAudio.paused) {
       playBgm();
     }
     ['click', 'touchstart', 'keydown', 'pointerdown'].forEach(evt => {
@@ -1083,16 +1077,6 @@
   ['click', 'touchstart', 'keydown', 'pointerdown'].forEach(evt => {
     document.addEventListener(evt, handleFirstUserGesture, { once: true });
   });
-
-  // Optional: Auto-start background music on first user click anywhere on page
-  function handleFirstUserGesture() {
-    if (!isBgmPlaying && bgmAudio.paused) {
-      playBgm();
-    }
-    document.removeEventListener('click', handleFirstUserGesture);
-  }
-  document.addEventListener('click', handleFirstUserGesture, { once: true });
-
 
   // ---------- Custom Glass Cursor ----------
   const cursorDot = document.getElementById('cursorDot');
@@ -1208,7 +1192,6 @@
   };
 
   function openLightbox(item){
-    // Pause background music during lightbox video playback so audio doesn't clash!
     if (isBgmPlaying) {
       bgmWasPlayingBeforeLightbox = true;
       pauseBgm(true);
@@ -1250,7 +1233,6 @@
     document.body.style.overflow = '';
     lbFrame.innerHTML = '';
 
-    // Resume background music if it was active before opening lightbox
     if (bgmWasPlayingBeforeLightbox) {
       playBgm();
     }
